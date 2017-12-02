@@ -15,13 +15,13 @@ def run_main():
     ret, frame = cap.read()
     # Set the ROI (Region of Interest). Actually, this is a
     # rectangle of the building that we're tracking
-    c,r,w,h = 900,500,80,80
+    c,r,w,h = 500,400,80,80
     track_window = (c,r,w,h)
     # Create mask and normalized histogram
     roi = frame[r:r+h, c:c+w]
 
     hsv_roi = cv2.cvtColor(roi, cv2.COLOR_BGR2HSV)
-    mask = cv2.inRange(hsv_roi, np.array((0., 100.,100.)), np.array((255.,255.,255.)))
+    mask = cv2.inRange(hsv_roi, np.array((80., 70.,100.)), np.array((255.,255.,255.)))
     roi_hist = cv2.calcHist([hsv_roi], [0], mask, [180], [0, 180])
     cv2.normalize(roi_hist, roi_hist, 0, 255, cv2.NORM_MINMAX)
     term_crit = (cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 80, 1)
