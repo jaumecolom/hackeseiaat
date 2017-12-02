@@ -16,6 +16,8 @@ import numpy as np
 import imutils
 import time
 
+import alerts
+
 camera = cv2.VideoCapture("boat33.mp4")
 counter = 0
 # keep looping
@@ -94,7 +96,7 @@ while True:
 				if status == "Boat(s) detected":
 					counter = counter + 1
 					if counter >= 60:
-						print('true')
+						alerts.post_alert(36.271816, 34.768209, frame)
 				else:
 					counter = 0
 
@@ -113,6 +115,7 @@ while True:
 		(0, 0, 255), 2)
 	#Show the edited video
 	cv2.imshow("Frame", frame)
+
 	#cv2.imshow("Test", shapeMask)
 	#cv2.imshow("Test2", hsv_test)
 
