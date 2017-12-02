@@ -20,6 +20,7 @@ import alerts
 
 camera = cv2.VideoCapture("boat33.mp4")
 counter = 0
+sent = False
 # keep looping
 while True:
 	#grabbed tells us if a frame has been detected by the webCam.
@@ -95,8 +96,9 @@ while True:
 
 				if status == "Boat(s) detected":
 					counter = counter + 1
-					if counter >= 60:
-						alerts.post_alert(36.271816, 34.768209, frame)
+					if counter >= 60 and not sent:
+						alerts.post_alert(36, 34, frame)
+						sent = True
 				else:
 					counter = 0
 
